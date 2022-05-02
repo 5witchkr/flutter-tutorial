@@ -8,6 +8,11 @@ import './Upload.dart';
 //이미지피커
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+//shared_preferences
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+
+
 
 void main() {
   runApp(
@@ -34,6 +39,26 @@ class _MyAppState extends State<MyApp> {
   dynamic data = [];
   dynamic userImage;
 
+  //shared_preferences
+  saveData() async {
+    dynamic storage = await SharedPreferences.getInstance();
+    //save
+    storage.setString('key','value');
+    //use data
+    dynamic storageResult = storage.get('key');
+    //map 자료? jsonEncode, jsonDecode로 변환후 사용
+    dynamic mapdata = {'myNumber' : 777};
+    storage.setString('mapkey', jsonEncode(mapdata));
+    dynamic resultmapdata = storage.getString('mapkey') ?? 'nullcheck?';
+    print(jsonDecode(resultmapdata)['myNumber']);
+    //log
+    print(storageResult);
+    //remove data
+    storage.remove('key');
+  }
+
+
+
   //get http (async-await를 사용하기위해 getData함수에 담아줌)
   getData() async {
     dynamic result = await http.get(Uri.parse('https://codingapple1.github.io/app/data.json'));
@@ -53,6 +78,10 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+
+    //storage 실행되는지 확인
+    saveData();
+
     getData();
   }
 
