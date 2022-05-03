@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
   //shared_preferences
   saveData() async {
     dynamic storage = await SharedPreferences.getInstance();
-    //save
+    //save  setSring말고 다른거도 가능 ex)bool,num? .. 등
     storage.setString('key','value');
     //use data
     dynamic storageResult = storage.get('key');
