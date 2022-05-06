@@ -4,7 +4,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 //스크롤 관련 함수 패키지
 import 'package:flutter/rendering.dart';
+//page import
 import './Upload.dart';
+import './UserPage.dart';
 //이미지피커
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -178,6 +180,17 @@ class _HomeState extends State<Home> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.network(widget.data[i]['image']),
+              //gestureDetector 특정동작을 위젯에 입힐때 사용
+              GestureDetector(
+                child: Text(widget.data[i]['user']),
+                onTap: (){
+                  //page open
+                  Navigator.push(context,
+
+                    MaterialPageRoute(builder: (context)=>UserPage())
+                  );
+                },
+              ),
               Text('좋아요 ${widget.data[i]['likes']}'),
               Text(widget.data[i]['date']),
               Text(widget.data[i]['content']),
