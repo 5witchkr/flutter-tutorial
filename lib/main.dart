@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import './style.dart' as style;
 import 'package:http/http.dart' as http;
@@ -186,8 +187,8 @@ class _HomeState extends State<Home> {
                 onTap: (){
                   //page open
                   Navigator.push(context,
-
-                    MaterialPageRoute(builder: (context)=>UserPage())
+                    //cupertinoPageRoute(page slide animation)
+                    CupertinoPageRoute(builder: (context)=>UserPage())
                   );
                 },
               ),
