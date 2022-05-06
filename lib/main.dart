@@ -187,8 +187,9 @@ class _HomeState extends State<Home> {
                 onTap: (){
                   //page open
                   Navigator.push(context,
-                    //cupertinoPageRoute(page slide animation)
-                    CupertinoPageRoute(builder: (context)=>UserPage())
+                    //pageroutebuilder (custom page animation)
+                    PageRouteBuilder(pageBuilder: (c, a1, a2) => UserPage(),
+                    transitionsBuilder: (c, a1, a2, child) => FadeTransition(opacity: a1, child: child))
                   );
                 },
               ),
