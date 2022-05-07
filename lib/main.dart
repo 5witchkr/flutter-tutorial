@@ -14,17 +14,23 @@ import 'dart:io';
 //shared_preferences
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+//provider
+import 'package:provider/provider.dart';
 
 
 
 void main() {
   runApp(
-    //materialapp위젯 사용함 (option : title, theme, home)
-    MaterialApp(
-      //option
-      //theme? css같은 역할
-      theme: style.themeAppBar,
-      home: MyApp()
+    //provider store1을 모든 위젯에서 사용함
+    ChangeNotifierProvider(
+      create: (c) => Store1(),
+      //materialapp위젯 사용함 (option : title, theme, home)
+      child: MaterialApp(
+        //option
+        //theme? css같은 역할
+        theme: style.themeAppBar,
+        home: MyApp()
+      ),
     )
   );
 }
@@ -213,3 +219,13 @@ class _HomeState extends State<Home> {
   }
 }
 
+//provider data
+class Store1 extends ChangeNotifier {
+  String name = 'switch';
+  //함수store
+  changeName(){
+    name = '스위치';
+    //state수정 후 재렌더링
+    notifyListeners();
+  }
+}
