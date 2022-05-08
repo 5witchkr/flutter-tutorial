@@ -21,9 +21,12 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    //provider store1을 모든 위젯에서 사용함
-    ChangeNotifierProvider(
-      create: (c) => Store1(),
+    //provider store1, store2를 모든 위젯에서 사용함
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (c) => Store1()),
+        ChangeNotifierProvider(create: (c) => Store2()),
+      ],
       //materialapp위젯 사용함 (option : title, theme, home)
       child: MaterialApp(
         //option
@@ -221,11 +224,34 @@ class _HomeState extends State<Home> {
 
 //provider data
 class Store1 extends ChangeNotifier {
-  String name = 'switch';
+  int follower = 0;
+  bool isfollower = false;
   //함수store
-  changeName(){
-    name = '스위치';
-    //state수정 후 재렌더링
+  addFollower(){
+    if (isfollower){
+      follower--;
+      isfollower = false;
+    } else {
+      follower++;
+      isfollower = true;
+    }
+    //재랜더링
+    notifyListeners();
+  }
+}
+
+class Store2 extends ChangeNotifier {
+  String name = 'username';
+}
+
+//get 받아온 data store저장
+class Store3 extends ChangeNotifier {
+  dynamic profileImage = [];
+
+  getData() async {
+    dynamic result = await http.get(Uri.parse('https:'));
+    dynamic result2 = jsonDecode(result.body);
+    profileImage = result2;
     notifyListeners();
   }
 }
