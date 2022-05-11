@@ -8,6 +8,8 @@ import 'package:flutter/rendering.dart';
 //page import
 import './Upload.dart';
 import './UserPage.dart';
+//store import
+import './Store.dart';
 //이미지피커
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -16,6 +18,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 //provider
 import 'package:provider/provider.dart';
+
 
 
 
@@ -223,36 +226,3 @@ class _HomeState extends State<Home> {
   }
 }
 
-//provider data
-class Store1 extends ChangeNotifier {
-  int follower = 0;
-  bool isfollower = false;
-  //함수store
-  addFollower(){
-    if (isfollower){
-      follower--;
-      isfollower = false;
-    } else {
-      follower++;
-      isfollower = true;
-    }
-    //재랜더링
-    notifyListeners();
-  }
-}
-
-class Store2 extends ChangeNotifier {
-  String name = 'username';
-}
-
-//get 받아온 data store저장
-class Store3 extends ChangeNotifier {
-  dynamic profileImage = [];
-
-  getData() async {
-    dynamic result = await http.get(Uri.parse('https:'));
-    dynamic result2 = jsonDecode(result.body);
-    profileImage = result2;
-    notifyListeners();
-  }
-}
