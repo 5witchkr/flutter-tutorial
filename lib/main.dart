@@ -26,6 +26,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (c) => Store1()),
         ChangeNotifierProvider(create: (c) => Store2()),
+        ChangeNotifierProvider(create: (c) => Store3()),
       ],
       //materialapp위젯 사용함 (option : title, theme, home)
       child: MaterialApp(
