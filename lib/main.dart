@@ -18,6 +18,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 //provider
 import 'package:provider/provider.dart';
+//notification
+import 'notification.dart';
 
 
 
@@ -97,6 +99,8 @@ class _MyAppState extends State<MyApp> {
 
     //storage 실행되는지 확인
     saveData();
+    //notification
+    initNotification(context);
 
     getData();
   }
@@ -105,6 +109,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     //scafflod 위젯 리턴
     return Scaffold(
+      floatingActionButton: FloatingActionButton(child: Text('알림'), onPressed: (){
+        showNotification();
+      },),
       //appbar (네비바)
       appBar: AppBar(
           title: Text('R9Sgram'),
